@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const sequelize = require('../../config/connection');
-const { Post, User, Comment, Vote } = require('../../models');
+const { Post, User, Comment } = require('../../models');
 // const withAuth = require('../../utils/auth');
 
 
-//GET /api/users
+//fetch (/api/users)
 router.get('/', (req, res) =>{
     User.findAll({
         attributes: { exclude: ['password' ] }
@@ -16,7 +16,7 @@ router.get('/', (req, res) =>{
         });
 });
 
-//GET api/users/id
+//fetch (api/users/id)
 router.get('/:id', (req, res) => {
     User.findOne({
         attributes: { exclude: ['password'] },
@@ -52,7 +52,7 @@ router.get('/:id', (req, res) => {
     
 });
 
-// POST api/users
+// create new user fetch (api/users)
 router.post('/', (req, res) => {
     User.create({
         username: req.body.username,
@@ -75,7 +75,7 @@ router.post('/', (req, res) => {
 });
 
 
-//post api/users/login
+//fetch (api/users/login)
 router.post('/login', (req, res) => {
     User.findOne({
         where: {
@@ -103,7 +103,7 @@ router.post('/login', (req, res) => {
     });
 })
 
-// api/user/logout
+// fetch (api/user/logout)
 router.post('/logout', (req, res) => {
     if (req.session.loggedIn) {
         req.session.destroy(() => {
@@ -113,27 +113,6 @@ router.post('/logout', (req, res) => {
       else {
         res.status(404).end();
       }
-});
-
-
-// DELETE /api/users/id
-router.delete('/:id', (req, res) => {
-    User.destroy({
-        where: {
-            id: req.params.id
-        }
-    })
-    .then(dbUserData => {
-        if(!dbUserData) {
-            res.status(404).json({ message: 'No User found with this id' });
-            return;
-        }
-        res.json(dbUserData);
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-    });
 });
 
 module.exports = router;
