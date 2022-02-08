@@ -1,22 +1,21 @@
 // import all models
-const Post = require('./Post');
 const User = require('./User');
+const Post = require('./Post');
 const Comment = require('./Comment');
 
 // create associations
 User.hasMany(Post, {
-  foreignKey: 'user_id',
-  constraints: false
+  foreignKey: 'user_id'
 });
 
 Post.belongsTo(User, {
-  foreignKey: 'user_id',
-  onDelete: 'SET NULL'
-});
+  foreignKey: 'user_id'
+})
 
+// comments belong to many users and posts
 Comment.belongsTo(User, {
   foreignKey: 'user_id',
-  onDelete: 'SET NULL'
+  onDelete: 'CASCADE'
 });
 
 Comment.belongsTo(Post, {
@@ -25,12 +24,12 @@ Comment.belongsTo(Post, {
 
 User.hasMany(Comment, {
   foreignKey: 'user_id',
-  onDelete: 'SET NULL'
+  onDelete: 'CASCADE'
 });
 
 Post.hasMany(Comment, {
   foreignKey: 'post_id',
-  onDelete: 'SET NULL'
+  onDelete: 'CASCADE'
 });
 
 module.exports = { User, Post, Comment };

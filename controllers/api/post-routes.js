@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const sequelize = require('../../config/connection');
 const { Post, User, Comment } = require('../../models');
-// const withAuth = require('../../utils/auth');
+const withAuth = require('../../utils/auth');
 
 // get all posts fetch(/api/post)
 router.get('/', (req, res) => {
@@ -35,49 +35,8 @@ router.get('/', (req, res) => {
 });
 
 
-// get one post fetch(api/post/:id)
-router.get('/:id', (req, res) => {
-  Post.findOne({
-    where: {
-      id: req.params.id
-    },
-    attributes: [
-      'id',
-      'title',
-      'content',
-      'created_at',
-    ],
-    include: [
-      {
-        model: Comment,
-        attributes: ['id', 'comment_text','post_id', 'user_id', 'created_at'],
-        include: {
-          model: User,
-          attributes: ['username']
-        }
-      },
-      {
-        model: User,
-        attributes: ['username']
-      }
-    ]
-  })
-    .then(dbPostData => {
-      if (!dbPostData) {
-        res.status(404).json({ message: 'No post found with this id' });
-        return;
-      }
-      res.json(dbPostData);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-});
-
-
-// create post fetch(api/post) ** with auth
-router.post('/', (req, res) => {
+// create post fetch(api/post) ** when logged in
+router.post('/', withAuth, (req, res) => {
   Post.create({
     title: req.body.title,
     content: req.body.content,
@@ -91,8 +50,8 @@ router.post('/', (req, res) => {
 });
 
 
-// edit post (api/post/id) ** withauth
-router.put('/:id', (req, res) => {
+// edit post (api/post/id) ** when logged in
+router.put('/:id', withAuth, (req, res) => {
   Post.update(
     {
       title: req.body.title,
@@ -118,8 +77,8 @@ router.put('/:id', (req, res) => {
 });
 
 
-// delete post (api/post/id) ** with auth
-router.delete('/:id', (req, res) => {
+// delete post (api/post/id) ** when logged in
+router.delete('/:id', withAuth, (req, res) => {
   Post.destroy({
     where: {
       id: req.params.id
