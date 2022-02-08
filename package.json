@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "watch":"nodemon server.js",
     "test": "jest",
     "start": "node server.js",
     "seed": "node seeds/index.js"
@@ -30,6 +31,7 @@
     "sequelize": "^6.15.0"
   },
   "devDependencies": {
-    "jest": "^27.4.7"
+    "jest": "^27.4.7",
+    "nodemon": "^2.0.15"
   }
 }
