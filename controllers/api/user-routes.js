@@ -60,13 +60,12 @@ router.post('/', (req, res) => {
         password: req.body.password
     })
 .then(dbUserData => {
-    console.log(dbUserData)
     req.session.save(() => {
         req.session.user_id = dbUserData.id;
         req.session.username = dbUserData.username;
         req.session.loggedIn = true;
 
-        res.json(dbUserData);
+        res.json({user: dbUserData, message: 'user created', session: req.session.user_id});
     })
 })
     .catch(err => {
@@ -99,7 +98,8 @@ router.post('/login', (req, res) => {
             req.session.username = dbUserData.username;
             req.session.loggedIn = true;
 
-            res.json({ user: dbUserData, message: 'You are now logged in!' });
+            res.json({ user: dbUserData, message: 'You are now logged in!', session:req.session.user_id
+         });
         });
     });
 })

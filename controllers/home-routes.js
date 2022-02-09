@@ -33,16 +33,16 @@ router.get('/', (req, res) => {
     });
 });
 
-// get single post for viewing
-router.get('post/:id', (req, res) => {
+// get single post
+router.get('/post/:id', (req, res) => {
   Post.findOne({
     where: {
       id: req.params.id
     },
     attributes: [
       'id',
-      'title',
       'content',
+      'title',
       'created_at',
     ],
     include: [
@@ -93,7 +93,7 @@ router.get('/login', (req, res) => {
 router.get('/dashboard', withAuth, (req, res) => {
   Post.findAll({
     where: {
-      id: req.session.user_id
+      user_id: req.session.user_id
     },
     attributes: [
       'id',
@@ -130,5 +130,45 @@ router.get('/dashboard', withAuth, (req, res) => {
       res.status(500).json(err);
     });
 });
+
+  //get post to edit
+  router.get('/edit/:id', withAuth, (req, res) => {
+    Post.findOne({
+      where: {
+        id: req.params.id
+      },
+      attributes: [
+        'id',
+        'content',
+        'title',
+        'created_at',
+      ],
+      include: [
+        {
+          model: Comment,
+          attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+          include: {
+            model: User,
+            attributes: ['username']
+          }
+        },
+        {
+          model: User,
+          attributes: ['username']
+        }
+      ]
+    })
+    .then(dbPostData => {
+      // serialize data before passing to template
+      const post = dbPostData.get({ plain: true })
+      res.render('edit-post', { post, loggedIn: true });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+
+  })
+
 
 module.exports = router;
