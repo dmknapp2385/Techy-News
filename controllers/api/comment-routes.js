@@ -3,6 +3,7 @@ const sequelize = require('../../config/connection');
 const { Post, User, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
+
 // post single comment
 router.post('/', withAuth, (req,res) => {
     // check the session
@@ -11,7 +12,8 @@ router.post('/', withAuth, (req,res) => {
             comment_text: req.body.comment_text,
             post_id: req.body.post_id,
             // use id from session
-            user_id: req.session.user_id
+            user_id: req.session.user_id,
+
         })
         .then(dbCommentData => res.json(dbCommentData))
         .catch(err => {
