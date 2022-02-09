@@ -1,18 +1,18 @@
 <article>
-  <a href="/dashboard"> &larr; Back to dashboard</a>
-  <h2 class="margins">
+  <a href="/dashboard"  class="black margins margin-top"> &larr; Back to dashboard</a>
+  <h2 class="margins margin-top">
     Edit Post
   </h2>
   <form class="edit-post-form margins">
     <div class=>
-      <label for="post-title">Post Title: </label>
+      <label for="post-title" class="margin-top">Post Title: </label>
       <input name="post-title" type="text" value="{{post.title}}" />
     </div>
-    <div>
-      <label for="post-content">Post Content:</label>
+    <div class="margin-top">
+      <label for="post-content" >Post Content:</label>
     </div>
     <div>
-      <textarea name="post-content" id="new-content" cols="100" rows="35" placeholder="{{post.content}}"></textarea>
+      <textarea name="post-content" id="new-content" cols="100" rows="35">{{post.content}}</textarea>
     </div>
     <div>
        by you on {{format_date post.created_at}}
