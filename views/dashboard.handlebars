@@ -2,12 +2,12 @@
 
 {{#if posts.length}}
 <section class="post-list">
-  <h2>Your Posts</h2>
+  <h2 class="margins">Your Posts</h2>
   <ol>
     {{#each posts as |post|}}
-    <li>
+    <li class="margins">
       {{> post-info post}}
-      <a href="/edit/{{post.id}}" class="edit-link black">Edit post</a>
+      <a href="/edit/{{post.id}}" class="edit-link cyan">Edit post</a>
     </li>
     {{/each}}
   </ol>
@@ -15,5 +15,5 @@
 {{/if}}
 
   <div class="new-post-button">
-        <button type="submit" class="btn"><a class="black" href="/newpost">Add a Post</a></button>
+        <button type="submit" class="btn"><a href="/newpost">Add a Post</a></button>
   </div>

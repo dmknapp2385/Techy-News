@@ -1,13 +1,15 @@
 
-{{>post-info post}}
-<div class="content">
+<div class="margins">
+  {{>post-info post}}
+</div>
+<div class="content margins">
   <p>{{post.content}}</p>
 </div>
 
 {{#if loggedIn}}
-<form class="comment-form">
+<form class=" margins comment-form">
   <div>
-    <textarea name="comment-body" rows="6" width="35"></textarea>
+    <textarea name="comment-body" rows="6" cols="80"></textarea>
   </div>
 
   <div>
@@ -16,7 +18,7 @@
 </form>
 {{/if}}
 
-<div class="comments">
+<div class="comments margins">
   <h3>Comments</h3>
   
   {{> comments post.comments}}

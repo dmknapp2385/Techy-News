@@ -16,6 +16,10 @@ header {
     margin: 5px;
 }
 
+.cyan {
+    color: darkcyan;
+}
+
 .wrapper h1 {
     font-size: 50px;
 }
@@ -30,12 +34,12 @@ a, .btn-no-style {
     display: flex;
     justify-content: space-between;
     text-decoration: none;
-    font-size: 15px;
+    font-size: 18px;
     margin-right: 20px;
 }
 
 .btn-no-style {
-    font-size: 15px;
+    font-size: 18px;
     background-color: darkcyan;
     border: none;
 }
@@ -55,7 +59,7 @@ a, .btn-no-style {
     margin-bottom: 20px;
 }
 
-.login-form {
+.center-page {
     font-size: 20px;
     margin-bottom: 15px;
     margin-left: 40%;
@@ -66,30 +70,22 @@ a, .btn-no-style {
     margin-bottom: 10px;
 }
 
-.signup-form {
-    margin-left: 40%;
-    margin-top: 5%;
-    font-size: 20px;
-}
-
 .signup-form div {
     margin-bottom: 20px;
 }
 
 form button[type="submit"] {
     background-color: darkcyan;
+    font-size: large;
     border-radius: 5px;
     box-shadow: 5px;
 }
 
-.center {
-    margin-left: 40%;
-    margin-top: 5%;
-    font-size: 20px;
+.size-medium {
+    font-size: 23px;
 }
-
-.comment-form, .comments {
-    margin: 15px;
+.size-small {
+    font-size: 15px;
 }
 
 .gray {
@@ -115,17 +111,22 @@ form button[type="submit"] {
     margin-bottom: 10px;
 }
 
-footer {
-    position: absolute;
-    bottom: 0;
+.new-post-button {
+    position: sticky;
+    bottom: 10  ;
     right:0;
     left: 0;
-    padding: 20px;
+    text-align: center;
+    margin-bottom: 10px;
+    height: 10px;
+}
+
+.new-post-button a {
+    border-radius: 5px;
     background-color: darkcyan;
     color: cornsilk;
-    text-align: center;
-    font-size: 30px;
-    height: 70px;
+    padding: 10px 23px;
+    font-size: 3rem;
 }
 
 @media screen and (max-width: 500px) {
