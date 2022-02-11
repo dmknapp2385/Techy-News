@@ -16,6 +16,10 @@ header {
     margin: 5px;
 }
 
+.post-margin {
+    margin-top: 10%;
+}
+
 .cyan {
     color: darkcyan;
 }
